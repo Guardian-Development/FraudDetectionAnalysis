@@ -15,11 +15,11 @@ But this becomes more apparent when looking at a cluster map of the same data.
 ### Attempt 1 
 #### Analysis on findings 
 The first attempt at building a Logistic Regression Model has resulted in  
-| Class | Precision | Recall | f1-score | support |
-| ----- | --------- | ------ | -------- | ------- | 
-| 0     | 1.00      | 1.00   | 1.00     | 113729  | 
-| 1     | 0.69      | 0.63   | 0.66     | 194     | 
-| Total | 1.00      | 1.00   | 1.00     | 113923  | 
+| Class  | Precision | Recall | f1-score | support |
+|--------|-----------|--------|----------|---------|
+| 0      | 1.00      | 1.00   | 1.00     | 113729  |
+| 1      | 0.69      | 0.63   | 0.66     | 194     |
+| Total  | 1.00      | 1.00   | 1.00     | 113923  |
 
 As you can see a lot of this data is fairly useless, as such a small proportion of our data is in class 1. However, 
 we can take away from this that we are between 60% and 70% accuracy when predicting fraudulent transactions. 
