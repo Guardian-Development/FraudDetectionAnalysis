@@ -34,16 +34,6 @@ class GraphBuilder(object):
         generate_pair_plot(data_set, self.output_location, filename)
         return self
 
-    def with_graph_size(self, height, width):
-        """
-        Sets the generic graph size for all generated graphs.
-        :param height: height of graph in inches
-        :param width: width of graph in inches
-        :return: self
-        """
-        plt.figure(figsize=(height, width))
-        return self
-
     def with_output_location(self, output_location):
         """
         Sets the graph output location.

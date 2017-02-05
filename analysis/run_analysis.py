@@ -14,7 +14,6 @@ def run_initial_data_analysis():
 
     GraphBuilder()\
         .with_output_location('./results/')\
-        .with_graph_size(15, 12)\
         .with_heat_map(analyser.get_column_correlations(), 'field_correlations_heat_map.png')\
         .with_cluster_map(analyser.get_column_correlations(), 'field_correlations_cluster_map.png')
 
