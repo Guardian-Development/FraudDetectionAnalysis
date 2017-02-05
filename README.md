@@ -22,7 +22,7 @@ But this becomes more apparent when looking at a cluster map of the same data.
 
 As you can see a lot of this data is fairly useless, as such a small proportion of our data is in class 1. However, 
 we can take away from this that we are between 60% and 70% accuracy when predicting fraudulent transactions. 
+As you can see below we predicted 122 fraudulent transactions successfully, we missed 55 and wrongly labelled 72 genuine transactions.
 #### Confusion matrix
-As you can see we predicted 122 fraudulent transactions successfully, we missed 55 and wrongly labelled 72 genuine transactions.
 ![Alt text](/analysis/results/logistic_regression_attempt_1_heat_map.png?raw=true) 
 
