@@ -12,7 +12,9 @@ But this becomes more apparent when looking at a cluster map of the same data.
 
 ## Logistic Regression 
 
-### Attempt 1 
+### Step 1 
+My first look into using basic Logistic Regression to predict the fraudulent transactions. 
+
 #### Analysis on findings 
 | Class  | Precision | Recall | f1-score | support |
 |--------|-----------|--------|----------|---------|
@@ -26,3 +28,21 @@ As you can see below we predicted 122 fraudulent transactions successfully, we m
 #### Confusion matrix
 ![Alt text](/analysis/results/logistic_regression_attempt_1_heat_map.png?raw=true) 
 
+### Step 2 
+Now I am training the Logistic Regression algorithm on a data set that has an even split of classification points. We can then see that we get 
+a much higher accuracy on predicting the fraudulent transactions as we have an evenly distributed data set. 
+
+#### Analysis on findings 
+| Class  | Precision | Recall | f1-score | support |
+|--------|-----------|--------|----------|---------|
+| 0      | 0.92      | 0.96   | 0.94     | 195     |
+| 1      | 0.96      | 0.91   | 0.94     | 199     |
+| Total  | 0.94      | 0.94   | 0.94     | 394     |
+As you can see we have increased our ability to predict the fraudulent class of data by giving it a higher distribution percentage 
+in our training set. 
+#### Confusion Matrix
+![Alt text](/analysis/results/logistic_regression_attempt_2_heat_map.png?raw=true) 
+
+# Next Steps
+To see whether this ability to predict fraudulent transactions remains as high when we go back to using the full data set. 
+After this I will look at tweaking the Logistic Regression algorithm to see if we can tune its accuracy.
