@@ -35,6 +35,12 @@ def get_even_weighted_train_test_split(analyser):
 
 
 def get_minimum_count_for_even_split(analyser, categories):
+    """
+    Gets the minimum count by category so we know what the minimum category count is
+    :param analyser: the data source
+    :param categories: the categories that are available
+    :return: int
+    """
     minimum_count = 0
     for category in categories:
         rows_found = analyser.data_set[analyser.data_set[analyser.prediction_column] == category]
@@ -46,6 +52,13 @@ def get_minimum_count_for_even_split(analyser, categories):
 
 
 def print_resulting_data_frame_info(analyser, categories, under_sample_data):
+    """
+    Prints the total number of rows used to get an even split of data
+    :param analyser: the data source
+    :param categories:  the categories that are available
+    :param under_sample_data: the data that will be used in the even split
+    :return: null
+    """
     for category in categories:
         print("Percentage of category in data: ",
               len(under_sample_data[under_sample_data[analyser.prediction_column] == category]) / len(
@@ -54,6 +67,13 @@ def print_resulting_data_frame_info(analyser, categories, under_sample_data):
 
 
 def get_indices_by_category(analyser, categories, minimum_count):
+    """
+    Gets an array of row indices to be included in the sample data to provide an even category split
+    :param analyser: the data source
+    :param categories: the categories that are available
+    :param minimum_count: the amount of rows for each category we should include
+    :return: array of int
+    """
     chosen_indices_by_category = []
     for category in categories:
         category_indices = analyser.data_set[analyser.data_set[analyser.prediction_column] == category].index

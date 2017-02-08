@@ -43,6 +43,24 @@ in our training set.
 #### Confusion Matrix
 ![Alt text](/analysis/results/logistic_regression_attempt_2_heat_map.png?raw=true) 
 
-# Next Steps
-To see whether this ability to predict fraudulent transactions remains as high when we go back to using the full data set. 
-After this I will look at tweaking the Logistic Regression algorithm to see if we can tune its accuracy.
+### Step 3 
+Now I am training the Logistic Regression algorithm on the evenly split data set but then running the predictions against the full data set. 
+We can see from the results that our overall accuracy has reduced as we are predicting a lot of regular transactions as fraudulent, however
+we can see we have successfully predicted more of the fraudulent ones.
+
+#### Analysis on findings 
+| Class  | Precision | Recall | f1-score | support |
+|--------|-----------|--------|----------|---------|
+| 0      | 1.00      | 0.97   | 0.98     | 113729  |
+| 1      | 0.05      | 0.92   | 0.09     | 194     |
+| Total  | 1.00      | 0.97   | 0.98     | 113923  |
+Analysing this, we can see a good step moving forward will be to look at making the algorithm more stringent on labelling fraudulent transactions  
+and I will look at changing some of the setup variables to see what gives us the best result. But this is a significant improvement as only  
+16 fraudulent transactions made it our past our predictions. 
+#### Confusion Matrix
+![Alt text](/analysis/results/logistic_regression_attempt_3_heat_map.png?raw=true) 
+
+# Next Steps 
+I will now lok at tweaking the performance on the algorithm to give the best results. 
+
+
