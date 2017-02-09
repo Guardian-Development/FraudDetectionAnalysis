@@ -75,7 +75,7 @@ This resulted in improvements to the results giving the final output.
 ![Alt text](/analysis/results/logistic_regression_attempt_4_heat_map.png?raw=true) 
 
 ## Conclusion
-A you can see in the final scenario we only missed 13 fraudulent transactions. Thi i a great achievement considering how 
+A you can see in the final scenario we only missed 13 fraudulent transactions. This is a great achievement considering how 
 unbalanced the classes are in the data set, we only have a tiny amount of fraudulent transactions to train our model with. 
 Moving forward I will look at refactoring the code base so we can use multiple models simultaneously. 
 
