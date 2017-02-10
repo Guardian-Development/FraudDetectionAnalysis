@@ -20,8 +20,9 @@ CSVReader:
 
 ModelPerformanceStatistics: 
 	PrintStatistics(actual, predictions)
-	GetConfusionMatrix(actual, predictions) 
-	
+	GetConfusionMatrix(actual, predictions)
+
+DONE
 
 TrainTestSplitBuilder: 
 	WithPredictionColumn(col_name)
@@ -32,9 +33,9 @@ TrainTestSplitBuilder:
 PredictiveModelsAccessor: 
 	array of available models, initialised on init 
 
-	OptimiseAndTrainModels(x_train, y_train): for each model in array, gets the available 		params to test for it, wraps it in grid search, then saves back the optimised model to the 		dictionary (so we can store accuracy etc with it) 
+	OptimiseAndTrainModels(x_train, y_train): for each model in array, gets the available params to test for it, wraps it in grid search, then saves back the optimised model to the 		dictionary (so we can store accuracy etc with it)
 
-	Predict(x_test, y_test): predicts for each model then if there is a discrepency in 		classification take most accurate model (for now) return confusion matrix -> through 		ModelPerformanceStatistics
+	Predict(x_test, y_test): predicts for each model then if there is a discrepency in 	classification take most accurate model (for now) return confusion matrix -> through 		ModelPerformanceStatistics
 
 (Interface)ModelEnhancer:
 	GetModel(): way of getting an instance of LogisiticRegression. 

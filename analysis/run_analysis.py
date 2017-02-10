@@ -1,7 +1,8 @@
 import os
+
 from analysis.analysis_suite.analyser import Analyser, get_even_weighted_train_test_split, get_train_test_split
-from analysis.analysis_suite.logistic_regression import LogisticRegressionModel, OptimisedLogisticRegressionModel
-from analysis.data_manager.file_reader import read_csv_file
+from analysis.analysis_suite.data_input.file_reader import read_csv_file
+from analysis.analysis_suite.logistic_regression import OptimisedLogisticRegressionModel
 from analysis.graph_generator.graph_builder import GraphBuilder
 
 
