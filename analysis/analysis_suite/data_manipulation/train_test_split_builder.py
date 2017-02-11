@@ -115,5 +115,6 @@ class TrainTestSplitBuilder(object):
         self.even_distribution = False
         self.data_frame = None
         self.predicting_column = None
+        np.random.seed(101)
 
 

@@ -8,6 +8,7 @@ def print_statistics_on_grid_search(grid_search):
     :param grid_search: the fitted GridSearch object
     :return: null
     """
+    print("printing gird search results for model: ", grid_search.best_estimator_)
     print(grid_search.best_params_)
     print(grid_search.best_score_)
 
@@ -29,5 +30,6 @@ def __print_statistics_on_predictions(actual, predictions):
     :param actual: the actual classifications
     :param predictions: the predicted classifications
     """
+    print("printing statistics on predictions made...")
     print(classification_report(actual, predictions))
     print(confusion_matrix(actual, predictions))
