@@ -21,6 +21,9 @@ After refactoring and adding multiple models I managed to gain this result.
 
 [[112392   1337]
 [     9    185]]
+
+# How I got to this code base 
+
 ### Step 1 
 My first look into using basic Logistic Regression to predict the fraudulent transactions. 
 
