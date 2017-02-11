@@ -10,8 +10,17 @@ The heat map shown that some correlations do seem to exist.
 But this becomes more apparent when looking at a cluster map of the same data. 
 ![Alt text](/analysis/results/field_correlations_cluster_map.png?raw=true)
 
-## Logistic Regression 
+## Using multiple models for Comparison
+After refactoring and adding multiple models I managed to gain this result. 
+#### Analysis on findings 
+| Class  | Precision | Recall | f1-score | support |
+|--------|-----------|--------|----------|---------|
+| 0      | 1.00      | 0.99   | 0.99     | 113729  |
+| 1      | 0.12      | 0.95   | 0.22     | 194     |
+| Total  | 1.00      | 0.99   | 0.99     | 113923  |
 
+[[112392   1337]
+[     9    185]]
 ### Step 1 
 My first look into using basic Logistic Regression to predict the fraudulent transactions. 
 

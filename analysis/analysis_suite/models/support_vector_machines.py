@@ -1,8 +1,7 @@
-from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
 
 
-class LogisticRegressionModelEnhancer(object):
-
+class SupportVectorMachinesModelEnhancer(object):
     def get_model(self):
         """
         Gets a Logistic Regression Model
@@ -34,6 +33,9 @@ class LogisticRegressionModelEnhancer(object):
         return self
 
     def __init__(self):
-        self.model = LogisticRegression()
+        self.model = SVC()
         self.accuracy = 0
-        self.optimisation_parameters = {'C': [0.1, 1, 10, 100, 1000], 'penalty': ['l1', 'l2']}
+        self.optimisation_parameters = {
+            'C': [0.1, 1, 5],
+            'random_state': [101]}
+

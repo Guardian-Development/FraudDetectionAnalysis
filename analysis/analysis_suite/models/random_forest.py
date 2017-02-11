@@ -1,8 +1,7 @@
-from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
 
 
-class LogisticRegressionModelEnhancer(object):
-
+class RandomForestClassifierModelEnhancer(object):
     def get_model(self):
         """
         Gets a Logistic Regression Model
@@ -34,6 +33,6 @@ class LogisticRegressionModelEnhancer(object):
         return self
 
     def __init__(self):
-        self.model = LogisticRegression()
+        self.model = RandomForestClassifier()
         self.accuracy = 0
-        self.optimisation_parameters = {'C': [0.1, 1, 10, 100, 1000], 'penalty': ['l1', 'l2']}
+        self.optimisation_parameters = {'n_estimators': [10], 'random_state': [101]}
