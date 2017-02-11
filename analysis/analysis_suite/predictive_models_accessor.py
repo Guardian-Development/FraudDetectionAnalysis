@@ -1,15 +1,8 @@
-# PredictiveModelsAccessor:
-# 	array of available models, initialised on init
-#
-# 	OptimiseAndTrainModels(x_train, y_train): for each model in array, gets the available params to test for it,
-#     wraps it in grid search, then saves back the optimised model to the 		dictionary (so we can store accuracy etc with it)
-#
-# 	Predict(x_test, y_test): predicts for each model then if there is a discrepency in 	classification take most accurate model (for now) r
-#     return confusion matrix -> through 		ModelPerformanceStatistics
 from sklearn.model_selection import GridSearchCV
-
 from analysis.analysis_suite.models.logistic_regression import LogisticRegressionModelEnhancer
-from analysis.analysis_suite.models.model_performance_statistics import print_statistics_on_grid_search
+from analysis.analysis_suite.models.model_performance_statistics import print_statistics_on_grid_search, \
+    get_confusion_matrix
+from collections import Counter
 
 
 class PredictiveModelsAccessor(object):
@@ -24,7 +17,7 @@ class PredictiveModelsAccessor(object):
         """
         for model_enhancer in self.available_model_enhancers:
             grid = GridSearchCV(model_enhancer.get_model(),
-                                model_enhancer.optimisation_parameters,
+                                model_enhancer.get_optimisation_parameters(),
                                 scoring=self.scoring_parameter)
 
             grid.fit(x_train, y_train)
@@ -34,21 +27,49 @@ class PredictiveModelsAccessor(object):
         return self
 
     def test_predictions(self, x_test, y_test):
+        """
+        Tests the models ability to predict classification based on x_test and y_test
+        :param x_test: data frame
+        :param y_test: data frame
+        :return: confusion matrix
+        """
         predictions = []
 
-        for data_row in x_test:
-            model_results = []
+        for data_row in x_test.iterrows():
+            prediction = self.__get_prediction__(data_row)
+            predictions.append(prediction)
 
-            for model in self.fitted_models:
-                model_results.append(model.predict(data_row))
+        return get_confusion_matrix(y_test, predictions)
 
-            # TODO: get unique results from model_results
-            # print what each model predicted
-            # set predictions to be most common one
-            # return confusion matrix for predictions against y_test
+    def with_scoring_goal(self, scoring_parameter):
+        """
+        Sets the scoring parameter to be used when judging the success of the model
+        :param scoring_parameter: string
+        :return: self
+        """
+        self.scoring_parameter = scoring_parameter
+        return self
+
+    def __get_prediction__(self, data_row):
+        """
+        Gets the prediction of the classification for the data row
+        :param data_row: data frame
+        :return: class prediction
+        """
+        model_predictions = []
+
+        # element 0 holds the row number which we do not require.
+        data_row = data_row[1].values.reshape(1, -1)
+        for model in self.fitted_models:
+            prediction = model.predict(data_row)
+            model_predictions.append(prediction[0])
+
+        if len(set(model_predictions)) == 1:
+            return model_predictions[0]
+        else:
+            prediction_counts = Counter(model_predictions)
+            return prediction_counts.most_common(1)[0]
 
     def __init__(self):
-        # TODO: pass scoring parameter
         self.fitted_models = []
         self.available_model_enhancers = [LogisticRegressionModelEnhancer()]
-        self.scoring_parameter = 'f1'

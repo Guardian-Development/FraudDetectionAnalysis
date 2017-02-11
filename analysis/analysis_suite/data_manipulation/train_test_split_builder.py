@@ -12,11 +12,11 @@ class TrainTestSplitBuilder(object):
         :return: x_train, x_test, y_train, y_test
         """
         if self.even_distribution:
-            return self.__get_train_test_split_without_even_distribution__()
-        else:
             return self.__get_train_test_split_with_even_distribution__()
+        else:
+            return self.__get_train_test_split_without_even_distribution__()
 
-    def use_column_distribution_split_if_needed(self, flag=True):
+    def use_column_distribution_split(self, flag=True):
         """
         Sets whether or not to produce even distributions of classifications when
         splitting the training data.
@@ -110,5 +110,10 @@ class TrainTestSplitBuilder(object):
                   len(under_sample_data[under_sample_data[self.predicting_column] == category]) / len(
                       under_sample_data))
         print("Total number of transactions used: ", len(under_sample_data))
+
+    def __init__(self):
+        self.even_distribution = False
+        self.data_frame = None
+        self.predicting_column = None
 
 
