@@ -1,0 +1,45 @@
+give location of CSV to read in on command line 
+
+reads in to system 
+
+evaluates whether it needs even partitioning of train and test data
+
+splits the file into test train data 
+calls into class that contains all models to be used for predictions 
+with the train data for each model works out the best parameters for them and fits them on the training data 
+it then assigns each model an accuracy score 
+it then predicts the result for each model on the test data and compares them 
+	if they are all equal it returns there value 
+	if not equal it looks at accuracy of model and then weights the decision based on current 		accuracy score. 
+	returns based on result of this which model to use
+It then returns its predictions to the calling function 
+calling function can then look at the confusion marks and final score from predictions 
+
+CSVReader: 
+	ReadCsv(file location) : returns the DataFrame 
+
+ModelPerformanceStatistics: 
+	PrintStatistics(actual, predictions)
+	GetConfusionMatrix(actual, predictions)
+
+DONE
+
+TrainTestSplitBuilder: 
+	WithPredictionColumn(col_name)
+	WithDataFrame(data_frame) 
+	UseColumnDistributionSplitIfNeeded() : sets true flase flag based on distribution. 
+	SplitData() : looks at dist flag before splitting : returns x_test....
+
+PredictiveModelsAccessor: 
+	array of available models, initialised on init 
+
+	OptimiseAndTrainModels(x_train, y_train): for each model in array, gets the available params to test for it, wraps it in grid search, then saves back the optimised model to the 		dictionary (so we can store accuracy etc with it)
+
+	Predict(x_test, y_test): predicts for each model then if there is a discrepency in 	classification take most accurate model (for now) return confusion matrix -> through 		ModelPerformanceStatistics
+
+(Interface)ModelEnhancer:
+	GetModel(): way of getting an instance of LogisiticRegression. 
+	GetOptimiserParameters(): returns a dict of optimiser parameters
+
+LogisticRegressionModelEnhance: implements model enhancer.
+	 
