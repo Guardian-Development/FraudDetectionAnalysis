@@ -16,6 +16,7 @@ class PredictiveModelsAccessor(object):
         :param y_train: y training data array
         :return: self
         """
+        print("optimising model parameters and fitting....")
         for model_enhancer in self.available_model_enhancers:
             grid = GridSearchCV(model_enhancer.get_model(),
                                 model_enhancer.get_optimisation_parameters(),
@@ -35,6 +36,7 @@ class PredictiveModelsAccessor(object):
         :param y_test: data frame
         :return: confusion matrix
         """
+        print("making predictions on test data for configured models...")
         predictions = []
 
         for data_row in x_test.iterrows():

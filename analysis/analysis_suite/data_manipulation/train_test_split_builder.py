@@ -3,7 +3,6 @@ import numpy as np
 
 
 class TrainTestSplitBuilder(object):
-
     def split_data(self):
         """
         Splits the data so you either have a random train test split,
@@ -12,18 +11,28 @@ class TrainTestSplitBuilder(object):
         :return: x_train, x_test, y_train, y_test
         """
         if self.even_distribution:
-            return self.__get_train_test_split_with_even_distribution__()
+            return self.__get_train_test_split_with_even_distribution()
         else:
             return self.__get_train_test_split_without_even_distribution__()
 
-    def use_column_distribution_split(self, flag=True):
+    def use_column_distribution_split_boundary(self, boundary=0.3):
         """
-        Sets whether or not to produce even distributions of classifications when
-        splitting the training data.
-        :param flag: boolean
+        Sets the boundary of whether or not to use an even training set or not.
+        If the minimum column your predicting has a percentage distribution less than or equal to the
+        boundary, then an even train test split is used.
+        :param boundary: decimal between 0 and 1
         :return: self
         """
-        self.even_distribution = flag
+        possible_categories = self.data_frame[self.predicting_column].unique()
+        minimum_category_count = self.__get_minimum_category_count_for_even_split__(possible_categories)
+        minimum_category_distribution = minimum_category_count / len(self.data_frame)
+        print("min category distribution: ", minimum_category_distribution)
+
+        if minimum_category_distribution <= boundary:
+            self.even_distribution = True
+        else:
+            self.even_distribution = False
+
         return self
 
     def with_data_frame(self, data_frame, predicting_column):
@@ -47,12 +56,31 @@ class TrainTestSplitBuilder(object):
         x = self.data_frame.drop(self.predicting_column, axis=1)
         return train_test_split(x, y, test_size=0.4, random_state=101)
 
-    def __get_train_test_split_with_even_distribution__(self):
+    def __get_train_test_split_with_even_distribution(self):
+        """
+        Builds train test split data for an even distribution, and populates
+        the test data with the remaining records of the data frame not found in the test data
+        :return: x_train, x_test, y_train, y_test
+        """
+        training_subset = self.__get_train_test_split_with_even_distribution_data_frame__()
+        y = training_subset[self.predicting_column]
+        x = training_subset.drop(self.predicting_column, axis=1)
+        x_train_complete, x_test, y_train_complete, y_test = train_test_split(x, y, test_size=0, random_state=101)
+
+        rest_of_data = self.data_frame[~self.data_frame.isin(training_subset)].dropna()
+        y = rest_of_data[self.predicting_column]
+        x = rest_of_data.drop(self.predicting_column, axis=1)
+        x_train, x_test_complete, y_train, y_test_complete = train_test_split(x, y, train_size=0, random_state=101)
+        print("data counts:", len(x_train_complete), len(x_test_complete), len(y_train_complete), len(y_test_complete))
+
+        return x_train_complete, x_test_complete, y_train_complete, y_test_complete
+
+    def __get_train_test_split_with_even_distribution_data_frame__(self):
         """
         Performs a train test split on a data structure so you are left with
         an event split for the classes you are trying to predict.
         It randomly selects records to allow this to happen.
-        :return: x_train, x_test, y_train, y_test
+        :return: data frame of rows to use
         """
         possible_categories = self.data_frame[self.predicting_column].unique()
         minimum_category_count = self.__get_minimum_category_count_for_even_split__(possible_categories)
@@ -62,9 +90,7 @@ class TrainTestSplitBuilder(object):
 
         self.__print_even_distributed_data_frame_info__(possible_categories, data_frame_subset)
 
-        y = data_frame_subset[self.predicting_column]
-        x = data_frame_subset.drop(self.predicting_column, axis=1)
-        return train_test_split(x, y, test_size=0.4, random_state=101)
+        return data_frame_subset
 
     def __get_minimum_category_count_for_even_split__(self, categories):
         """
@@ -116,5 +142,3 @@ class TrainTestSplitBuilder(object):
         self.data_frame = None
         self.predicting_column = None
         np.random.seed(101)
-
-
