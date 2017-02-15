@@ -8,19 +8,17 @@ from analysis.analysis_suite.predictive_models_accessor import PredictiveModelsA
 from analysis.graph_generator.heatmap_generator import generate_heat_map
 
 
-# TODO: read in csv file location and predicting column from command line
-# TODO: optional output parameter of where you want the resulting graph
-# TODO: optional scoring parameter to be passed
-# TODO: refactor code around train test split to see if can make cleaner
-
-def run_data_analysis(file_location, predicting_column, scoring_parameter):
+def run_data_analysis(file_location, predicting_column, scoring_parameter, columns_to_scale):
     """
     Runs analysis on data set.
     """
     print("reading data into program...")
     current_date_time_string = datetime.datetime.now().strftime("%I:%M%p_%B_%d_%Y")
     data_frame = read_csv_file(file_location)
-    data_frame = scale_column_to_range(data_frame=data_frame, column_name='Amount')
+
+    for column_name in columns_to_scale:
+        print("scaling column: ", column_name)
+        data_frame = scale_column_to_range(data_frame=data_frame, column_name=column_name)
 
     print("building train, test data sets...")
     x_train, x_test, y_train, y_test = \
@@ -57,4 +55,3 @@ def run_data_analysis(file_location, predicting_column, scoring_parameter):
         fig_size=(7, 7))
 
     print("time taken to predict all data: ", (end - start))
-
