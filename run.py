@@ -9,8 +9,10 @@ def parse_command_line_arguments(argv):
     predicting_col = None
     scoring_param = None
 
+    print("reading command line arguments in...")
+
     try:
-        opts, args = getopt.getopt(argv, "hi:p:s")
+        opts, args = getopt.getopt(argv, "hi:p:s:")
     except getopt.GetoptError:
         print("run.py -i <input_file> -p <predicting_column> -s <scoring_parameter>")
         sys.exit(2)
