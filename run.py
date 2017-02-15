@@ -32,7 +32,7 @@ def parse_command_line_arguments(argv):
     parser.add_argument('-i', '--input', help='Location of input csv file', required=True)
     parser.add_argument('-p', '--predicting', help='The column name containing the category to predict', required=True)
     parser.add_argument('-s', '--scoring', help='The scoring type to be used with model evaluation', required=False)
-    parser.add_argument('-c', '--scale', help='List of column names to scale values for', nargs='+')
+    parser.add_argument('-c', '--scale', help='List of column names to scale values for', nargs='+', required=False)
     args = parser.parse_args()
 
     return args.input, args.predicting, args.scoring, args.scale
