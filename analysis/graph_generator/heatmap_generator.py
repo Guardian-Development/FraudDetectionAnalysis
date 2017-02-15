@@ -7,7 +7,9 @@ def generate_heat_map(matrix_data_set, output_location, filename, annotate=False
     Generates a heat map for the given matrix structured data_set.
     """
     plt.figure(figsize=fig_size)
-    gr = sns.heatmap(matrix_data_set, annot=annotate, fmt='g').get_figure()
+    ax = plt.axes()
+    gr = sns.heatmap(matrix_data_set, annot=annotate, fmt='g', ax=ax).get_figure()
+    ax.set_title('Predicted class (X) against Actual class (Y)')
     gr.savefig(output_location + filename)
 
 

@@ -15,7 +15,7 @@ class TrainTestSplitBuilder(object):
         else:
             return self.__get_train_test_split_without_even_distribution__()
 
-    def use_column_distribution_split_boundary(self, boundary=0.3):
+    def use_column_distribution_split_boundary(self, boundary=0.1):
         """
         Sets the boundary of whether or not to use an even training set or not.
         If the minimum column your predicting has a percentage distribution less than or equal to the
@@ -65,13 +65,11 @@ class TrainTestSplitBuilder(object):
         training_subset = self.__get_train_test_split_with_even_distribution_data_frame__()
         y = training_subset[self.predicting_column]
         x = training_subset.drop(self.predicting_column, axis=1)
-        x_train_complete, x_test, y_train_complete, y_test = train_test_split(x, y, test_size=0, random_state=101)
+        x_train_complete, x_test, y_train_complete, y_test = train_test_split(x, y, test_size=0.2, random_state=101)
 
-        rest_of_data = self.data_frame[~self.data_frame.isin(training_subset)].dropna()
-        y = rest_of_data[self.predicting_column]
-        x = rest_of_data.drop(self.predicting_column, axis=1)
+        y = self.data_frame[self.predicting_column]
+        x = self.data_frame.drop(self.predicting_column, axis=1)
         x_train, x_test_complete, y_train, y_test_complete = train_test_split(x, y, train_size=0, random_state=101)
-        print("data counts:", len(x_train_complete), len(x_test_complete), len(y_train_complete), len(y_test_complete))
 
         return x_train_complete, x_test_complete, y_train_complete, y_test_complete
 

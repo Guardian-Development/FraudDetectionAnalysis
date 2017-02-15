@@ -35,4 +35,4 @@ class RandomForestClassifierModelEnhancer(object):
     def __init__(self):
         self.model = RandomForestClassifier()
         self.accuracy = 0
-        self.optimisation_parameters = {'n_estimators': [10, 20, 50, 100], 'random_state': [101]}
+        self.optimisation_parameters = {'n_estimators': [10, 50, 70, 100], 'random_state': [101]}
