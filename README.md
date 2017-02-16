@@ -18,6 +18,10 @@ example usage with all params:
 
 1. python3 run.py -i /home/Documents/Projects/Testing/test.csv -p Class -s f1 -c Amount Weight
 
+Accuracy parameters can be found here:
+
+1. http://scikit-learn.org/stable/modules/model_evaluation.html#scoring-parameter
+
 # Output
 The 'run.py' program prints the confusion matrix and classification report about the success of the predictions made. It
 then generates a graph of the confusion matrix, replacing the latest_result.png graph and adding a new graph under the 
