@@ -16,7 +16,7 @@ with optional parameters:
 
 example usage with all params: 
 
-1. python3 run.py /home/Documents/Projects/Testing/test.csv -p Class -s f1 -c Amount Weight
+1. python3 run.py -i /home/Documents/Projects/Testing/test.csv -p Class -s f1 -c Amount Weight
 
 # Output
 The 'run.py' program prints the confusion matrix and classification report about the success of the predictions made. It
