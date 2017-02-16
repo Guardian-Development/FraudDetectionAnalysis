@@ -5,14 +5,17 @@ SVC and RandomForest. Please be aware, if the RandomForests uses al large set of
 
 # How to use 
 run the file 'run.py' with required parameters: 
+
 1. -i : the input file location e.g. C:\document\test.csv
 2. -p : the column name you are trying to predict e.g. Class
 
 with optional parameters: 
+
 1. -s : the scoring type to use e.g. f1 
 2. -c : a list of column names to scale to the rest of the data set e.g. Amount Weight Test
 
 example usage with all params: 
+
 1. python3 run.py /home/Documents/Projects/Testing/test.csv -p Class -s f1 -c Amount Weight
 
 # Output
