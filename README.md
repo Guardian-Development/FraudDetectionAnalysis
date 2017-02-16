@@ -57,14 +57,30 @@ the below findings when using this with configured LogisticRegression, RandomFor
 | Total  | 1.00      | 0.97   | 0.98     | 284807  |
 
 ### Predictions 
-![Alt text](/analysis/results/latest_result.png?raw=true)
+![Alt text](/analysis/results/06:22PM_February_15_2017_results.png?raw=true)
 
 # Data set 
 The data set used can be found here: https://www.kaggle.com/dalpozz/creditcardfraud/ 
 
-# Next steps 
-I will attempt to run this analysis suite against other data sets that do binary classification and see how it performs. 
+# Iris Prediction
+Predicting the flower classification based on features. 
 
+## Run parameters used 
+python3 run.py -i /home/joe/Documents/Iris.csv -p Species -s accuracy
 
+## Predictions 
+After using the same approach as the Fraud Detection data set, I have been able to achieve 100% accuracy on the 
+data set. 
+
+### Accuracy 
+| Class            | Precision | Recall | f1-score | support |
+|------------------|-----------|--------|----------|---------|
+| Iris-setosa      | 1.00      | 1.00   | 1.00     | 19      |
+| Iris-vertiscolor | 1.00      | 1.00   | 1.00     | 26      |
+| Iris-virginica   | 1.00      | 1.00   | 1.00     | 15      |
+| Total            | 1.00      | 1.00   | 1.00     | 60      |
+
+### Predictions 
+![Alt text](/analysis/results/latest_result.png?raw=true)
 
 

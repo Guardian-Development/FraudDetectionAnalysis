@@ -13,6 +13,9 @@ def start_analysis(file_location, predicting_col, scoring_param, columns_to_scal
     :param scoring_param: the scoring system to judge model efficiency
     :return: null
     """
+    if columns_to_scale is None:
+        columns_to_scale = []
+
     run_data_analysis(
         file_location=file_location,
         predicting_column=predicting_col,
